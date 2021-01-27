@@ -122,6 +122,7 @@ void DedicatedEpochAdvancer::advancer(int task_num){
 }
 
 void DedicatedEpochAdvancer::sync(uint64_t c){
+    sync_counts[EpochSys::tid].ui++;
     uint64_t target_epoch = c+2;
     std::unique_lock<std::mutex> lk(sync_signal.bell);
     if (target_epoch < sync_signal.target_epoch-2){
